@@ -24,4 +24,8 @@ body.ltr .element.removable.linked .label {
   &:hover::before {
     background-image: url('../img/inline-svg/download-focus.svg');
   }
+
+  &::after {
+    content: none !important;
+  }
 }

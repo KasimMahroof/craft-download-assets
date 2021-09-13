@@ -71,15 +71,17 @@ class DownloadAssetsPlugin {
     const assetFields = [...elementSelectFields].filter(field => field.dataset.type === 'craft\\elements\\Asset');
 
     assetFields.forEach((field) => {
-      const a = document.createElement('a');
       const label = field.querySelector('.label');
+      const anchorTag = label.querySelector('a');
+
       if (field && label) {
-        a.setAttribute('target', '_blank');
-        a.setAttribute('href', field.dataset.url);
-        a.classList.add('download');
-        a.classList.add('icon');
-        field.insertBefore(a, label);
-        field.classList.add('linked');
+        let href = field.dataset.url;
+
+        if (!href) {
+          href = `/admin/assets/edit/${field.dataset.id}`;
+        }
+
+        anchorTag.href = href;
       }
     });
   }
